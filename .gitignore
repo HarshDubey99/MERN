@@ -1,3 +1,2 @@
-*.json
-*.txt
+userdata/
 node_modules/
