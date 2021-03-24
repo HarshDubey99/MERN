@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WFS-LOGIN</title>
+    style 
+        include ../static/style.css
+  </head>
+  <body>
+    <div class="container">
+        include ../static/head.html                        
+        <div class="bodyContainer">
+            <div class="col1">
+                img(src="/static/img/loginImg.png",id="bgimg1")
+            </div>
+            <div class="col2">
+                <form action="/authentication" method="post" id="loginForm"> 
+                    <h1 id="col2Heading">LOGIN TO ACCOUNT</h1>
+                    <input type="email" class="inp" name="user_email" placeholder="Enter Your Email ID" />
+                    <input type="password" class="inp" name="user_password" placeholder="Enter Your Password" />
+                    <button type="submit" id="btnlogin" onclick='storingUserid'>LOGIN</button>
+                    <span id="loginError">#{loginerrmsg}</span>
+                <form>
+            </div>        
+        </div>
+    </div>    
+    include ../static/footer.html    
+  </body>
+</html>

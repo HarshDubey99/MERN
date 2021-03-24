@@ -1,0 +1,118 @@
+/* Header */
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  min-height: 100vh;
+  margin: auto;
+}
+#navbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: black;
+  align-items: center;
+}
+#brand {
+  color: white;
+  letter-spacing: 2px;
+  padding: 20px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 24px;
+  margin-right: 25px;
+  padding: 5px;
+  color: #fff;
+}
+a:hover {
+  border-bottom: 4px solid whitesmoke;
+}
+/* End */
+/* Body */
+
+.bodyContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 10px auto;
+  justify-content: space-around;
+}
+
+.col1 {
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+}
+.col2 {
+  width: 50%;
+  text-overflow: ellipsis;
+  padding: 20px;
+}
+#bgimg1 {
+  height: 500px;
+}
+#col2Heading {
+  text-align: center;
+  font-size: 36px;
+  margin: 20px auto;
+}
+#col2Para {
+  font-size: x-large;
+  padding: 10px;
+  margin: 20px auto;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.inp {
+  margin: 20px;
+  padding: 20px;
+  font-size: 28px;
+  border: 0px;
+  border-bottom: 2px solid black;
+  outline: none;
+}
+#btnlogin {
+  margin: 20px auto;
+  padding: 10px;
+  width: 25%;
+  font-size: 22px;
+  cursor: pointer;
+}
+#loginError,
+#signupErrorMsg {
+  color: red;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  font-weight: 600;
+}
+/* End */
+/* Signup */
+#signupSuccessMsg {
+  color: green;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  font-weight: 600;
+}
+/* Footer */
+.footerBox {
+  width: 100%;
+  background-color: black;
+  position: static;
+  bottom: 0px;
+  color: #fff;
+}
+#footerText {
+  padding: 10px;
+  letter-spacing: 2px;
+}
+/* End */

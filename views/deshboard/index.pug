@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WFS-DESHBOARD</title>
+    style 
+        include ../../static/deshboard/style.css        
+  </head>
+  <body>
+    <div class="container">
+        include ../../static/deshboard/header.html        
+        <div class="bodyContainer">
+            <div class="col1">
+              include ../../static/deshboard/sidebar.html 
+            </div>
+            <div class="col2">
+                <span id="breadcrumb">Deshboard / #{user}</span>                
+                <div id="statisticBox">
+                  <div class="cardBox">
+                    <h2 class="cardHeader">CREATED FILES</h2>
+                    <div class="cardBody"><h1>200</h1></div>
+                  </div>
+                  <div class="cardBox">
+                    <h2 class="cardHeader">UPDATED FILES</h2>
+                    <div class="cardBody"><h1>200</h1></div>
+                  </div>
+                  <div class="cardBox">
+                    <h2 class="cardHeader">DELETED FILES</h2>
+                    <div class="cardBody"><h1>200</h1></div>
+                  </div>
+                </div>
+
+                <div id="folderFormBox">
+                  <form action="/createfolder" method="post">
+                    <h1>Create New Folder</h1>
+                    <input type="text" class="inp" name="folder_name" placeholder="Enter Folder Name" required  /><br/> 
+                     <span id="successMsg">#{successmsg}</span><br/>
+                    <span id="errMsg">#{errmsg}</span><br/>
+                    <button type="submit" id="btnCreateFolder">CREATE</button>                   
+                  </form>
+                </div>
+            </div>        
+        </div>
+    </div>      
+  </body>
+</html>

@@ -1,0 +1,231 @@
+/* Header */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+#navboxHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: black;
+  align-items: center;
+  color: #fff;
+}
+#headBrand {
+  color: white;
+  letter-spacing: 2px;
+  padding: 8px;
+  font-family: "Times New Roman";
+  margin-left: 20px;
+}
+#accSettingBox {
+  min-width: 160px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+#accImg {
+  height: 25px;
+  width: 25px;
+  border: 2px solid #fff;
+  padding: 2px;
+  margin-right: 10px;
+  border-radius: 100%;
+}
+#settingTxt {
+  letter-spacing: 1px;
+}
+/* End */
+/* Sidebar */
+#sidebar {
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+}
+#sidebar li {
+  padding: 10px;
+  margin: 20px auto;
+}
+#sidebar li a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#sidebar li:hover {
+  background-color: gray;
+  transition: all 0.2s;
+}
+/* End */
+/* Body */
+
+.bodyContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  margin: 0px auto;
+  justify-content: space-between;
+}
+
+.col1 {
+  min-height: 100vh;
+  width: 14%;
+  overflow: hidden;
+  background: black;
+}
+.col2 {
+  background-color: lightgray;
+  width: 86%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+#breadcrumb {
+  padding: 10px;
+  font-size: 19px;
+  font-weight: 400;
+  align-items: center;
+}
+#statisticBox {
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.cardBox {
+  min-height: 300px;
+  width: 300px;
+  background-color: #fff;
+  text-align: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.3);
+}
+.cardHeader {
+  margin-top: 20px;
+  letter-spacing: 2px;
+}
+.cardBody {
+  display: flex;
+  height: 150px;
+  width: 150px;
+  font-size: 28px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 4px solid black;
+  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3),
+    0px 8px 16px 0px rgba(0, 0, 0, 0.3) inset;
+}
+/* Create New Folder */
+#folderFormBox {
+  width: 700px;
+  margin: 200px auto;
+  box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 20px;
+}
+.inp {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  font-size: 28px;
+  border: 2px solid black;
+  outline: none;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3),
+    0px 8px 16px 0px rgba(0, 0, 0, 0.3) inset;
+}
+#btnCreateFolder {
+  margin: 20px auto;
+  padding: 10px;
+  width: 25%;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+#successMsg {
+  color: green;
+}
+#errMsg {
+  color: red;
+}
+
+/* End */
+/* All Files */
+#allFilesBox {
+  width: 86%;
+  margin: 40px auto;
+  box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  overflow: auto;
+  padding: 20px;
+}
+#fileBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#fileCardBox,
+#folderCardBox {
+  padding-right: 20px;
+}
+.fileCard {
+  height: 150px;
+  width: 250px;
+  margin: 20px auto;
+  background-color: #fff;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  overflow-wrap: break-word;
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.2);
+}
+.fileCard h3,
+.folderCard h3 {
+  text-overflow: ellipsis;
+  margin: 0px auto;
+  background-color: black;
+  color: white;
+  padding: 10px;
+}
+.fileCard h4,
+.folderCard h4 {
+  margin-top: 80px;
+  text-transform: uppercase;
+}
+
+.folderCard {
+  height: 150px;
+  width: 250px;
+  background-color: gray;
+  margin: 20px auto;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  overflow-wrap: break-word;
+  box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.3);
+}
+/* End */ ;

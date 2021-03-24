@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WFS-DESHBOARD</title>
+    style 
+        include ../../static/deshboard/style.css        
+  </head>
+  <body>
+    <div class="container">
+        include ../../static/deshboard/header.html        
+        <div class="bodyContainer">
+            <div class="col1">
+              include ../../static/deshboard/sidebar.html 
+            </div>
+            <div class="col2">
+                <span id="breadcrumb">Deshboard / Allfiles</span>                                
+                <div id="allFilesBox">
+                <h1>All Files</h1>
+                <div id="fileBox">                                                           
+                    each val in fileData
+                      if val.indexOf(".") > 0
+                        <div id="fileCardBox"> 
+                          <div class="fileCard">    
+                            h3=val                    
+                            <h4>File</h4>
+                          </div>
+                        </div>                        
+                      else 
+                        <div id="folderCardBox"> 
+                          <div class="folderCard">    
+                            h3=val   
+                            <h4>Folder</h4>                 
+                          </div>   
+                        </div>                                                        
+                    </div>              
+                </div>
+            </div>        
+        </div>
+    </div>      
+  </body>
+</html>
