@@ -25,6 +25,7 @@ let dashData = {
   user: "",
   successmsg: "",
   errmsg: "",
+  countCreatedFiles: "",
 };
 // HOME PAGE
 app.get("/", (req, res) => {
@@ -125,11 +126,27 @@ app.post("/signingup", (req, res) => {
   }
 });
 
+function getCountCreatedFiles(UID) {
+  let uid = UID;
+
+  let files = [];
+  // Path for in which dir to serch files
+  let dir = path.join(__dirname, `userdata/${uid}/`);
+  let filenames = fs.readdirSync(dir);
+
+  filenames.forEach((file) => {
+    files.push(file);
+  });
+  return files.length;
+}
+
 // DESHBOARD
 app.get("/deshboard", (req, res) => {
   let uid = req.cookies.UID;
   if (uid) {
     dashData.user = uid;
+    let countCreated = getCountCreatedFiles(uid);
+    dashData.countCreatedFiles = countCreated;
     res.status(200).render("deshboard/index.pug", dashData);
   } else {
     params.loginerrmsg = "Error To Login!! Please Try Again With Valid Data.";
@@ -167,7 +184,7 @@ app.get("/allfiles", (req, res) => {
   let dir = path.join(__dirname, `userdata/${uid}/`);
 
   //  checking file is exists
-  fs.readFile(dir, (err, files) => {
+  fs.readdir(dir, (err, files) => {
     if (err) {
       res.redirect("/deshboard");
     } else {
