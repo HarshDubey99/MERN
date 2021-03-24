@@ -46,7 +46,8 @@ app.post("/authentication", (req, res) => {
     params.loginerrmsg = "";
     fs.readFile(`userdata/${email}/${email}.json`, "utf-8", (err, data) => {
       if (err) {
-        params.loginerrmsg = "Invalid User!!";
+        params.loginerrmsg =
+          "Unautherized User! Please Register Your Self First.";
         res.status(404).render("login.pug", params);
       } else {
         params.loginerrmsg = "";
@@ -59,7 +60,7 @@ app.post("/authentication", (req, res) => {
           res.status(200).redirect("/deshboard");
         } else {
           params.loginerrmsg =
-            "Unautherized User! Please Login With Currect Data.";
+            "Invalid Id Or Password! Please Login With Currect Data.";
           res.status(404).render("login.pug", params);
         }
       }
@@ -68,6 +69,10 @@ app.post("/authentication", (req, res) => {
     params.loginerrmsg = "Error To Login!! Please Try Again With Valid Data.";
     res.status(403).render("login.pug", params);
   }
+});
+
+app.get("/authentication", (req, res) => {
+  res.redirect("/login");
 });
 
 // SIGNUP PAGE
@@ -88,18 +93,31 @@ app.post("/signingup", (req, res) => {
   let confirmPass = req.body.user_conf_password;
 
   if (name && email && password && confirmPass) {
-    let userData = JSON.stringify(req.body);
-    let dir = path.join(__dirname, `userdata/${email}`);
+    if (password !== confirmPass) {
+      params.signupsuccessmsg = "";
+      params.signuperrmsg =
+        "Confirm Password Doesn't Matched! Enter Common Password";
+      res.render("signup.pug", params);
+    } else {
+      let userData = JSON.stringify(req.body);
+      let dir = path.join(__dirname, `userdata/${email}`);
 
-    // Creating directory To Store Users Data
-    fs.mkdirSync(dir);
-
-    fs.writeFileSync(`userdata/${email}/${email}.json`, userData);
-
-    params.signupsuccessmsg = "Your Account Has Been Created Successfully";
-    params.signuperrmsg = "";
-
-    res.render("login.pug", params);
+      // Checking Account Already Exist
+      if (fs.existsSync(dir) === true) {
+        params.signupsuccessmsg = "";
+        params.signuperrmsg =
+          "This Email Is Already Exists! Please Try Diffrent Email.";
+        res.render("signup.pug", params);
+      } else {
+        // Creating directory To Store Users Data
+        fs.mkdirSync(dir);
+        fs.writeFileSync(`userdata/${email}/${email}.json`, userData);
+        params.signupsuccessmsg =
+          "Your Account Has Been Created Successfully.Now You Can Login.";
+        params.signuperrmsg = "";
+        res.render("login.pug", params);
+      }
+    }
   } else {
     params.signupsuccessmsg = "";
     params.signuperrmsg = "Please Fill The All Details!";
@@ -148,13 +166,26 @@ app.get("/allfiles", (req, res) => {
   // Path for in which dir to serch files
   let dir = path.join(__dirname, `userdata/${uid}/`);
 
-  let filenames = fs.readdirSync(dir);
+  //  checking file is exists
+  fs.readFile(dir, (err, files) => {
+    if (err) {
+      res.redirect("/deshboard");
+    } else {
+      let filenames = fs.readdirSync(dir);
 
-  filenames.forEach((file) => {
-    fileData.push(file);
+      filenames.forEach((file) => {
+        fileData.push(file);
+      });
+
+      res.status(200).render("deshboard/allfiles.pug", { dashData, fileData });
+    }
   });
+});
 
-  res.status(200).render("deshboard/allfiles.pug", { dashData, fileData });
+// LOGOUT
+app.get("/logout", (req, res) => {
+  res.clearCookie("UID");
+  res.redirect("/login");
 });
 
 // STARTING SERVER
