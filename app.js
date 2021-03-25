@@ -23,8 +23,12 @@ let params = {
 };
 let dashData = {
   user: "",
-  successmsg: "",
-  errmsg: "",
+  fileCreatedsmsg: "",
+  fileDeletedsmsg: "",
+  folderCreatedsmsg: "",
+  CreatingErrmsg: "",
+  DeletingErrmsg: "",
+  createdFiles: "",
   countCreatedFiles: "",
 };
 // GLOBAL FUNCTIONS
@@ -39,7 +43,7 @@ function getCountCreatedFiles(UID) {
   filenames.forEach((file) => {
     files.push(file);
   });
-  return files.length;
+  return files;
 }
 // END
 
@@ -150,8 +154,9 @@ app.get("/deshboard", (req, res) => {
   let uid = req.cookies.UID;
   if (uid) {
     dashData.user = uid;
-    let countCreated = getCountCreatedFiles(uid);
-    dashData.countCreatedFiles = countCreated;
+    let createdFiles = getCountCreatedFiles(uid);
+    dashData.createdFiles = createdFiles;
+    dashData.countCreatedFiles = createdFiles.length;
     res.status(200).render("deshboard/index.pug", dashData);
   } else {
     params.loginerrmsg = "Error To Login!! Please Try Again With Valid Data.";
@@ -172,12 +177,12 @@ app.post("/createfile", (req, res) => {
   if (!fs.existsSync(dir)) {
     // Creating File
     fs.appendFileSync(dir, FileContent);
-    dashData.successmsg = "File Is Created";
-    dashData.errmsg = "";
+    dashData.fileCreatedsmsg = "File Is Created";
+    dashData.CreatingErrmsg = "";
     res.status(200).render("deshboard/index.pug", dashData);
   } else {
-    dashData.successmsg = "";
-    dashData.errmsg = "File already exists! Try Different Name";
+    dashData.fileCreatedsmsg = "";
+    dashData.CreatingErrmsg = "File already exists! Try Different Name";
     res.status(403).render("deshboard/index.pug", dashData);
   }
 });
@@ -194,13 +199,48 @@ app.post("/createfolder", (req, res) => {
   if (!fs.existsSync(dir)) {
     // Creating Folder
     fs.mkdirSync(dir);
-    dashData.successmsg = "Folder Is Created";
-    dashData.errmsg = "";
+    dashData.folderCreatedsmsg = "Folder Is Created";
+    dashData.CreatingErrmsg = "";
     res.status(200).render("deshboard/index.pug", dashData);
   } else {
-    dashData.successmsg = "";
-    dashData.errmsg = "Folder already exists! Try Different Name";
+    dashData.folderCreatedsmsg = "";
+    dashData.CreatingErrmsg = "Folder already exists! Try Different Name";
     res.status(403).render("deshboard/index.pug", dashData);
+  }
+});
+// END
+
+// DELETING FILES
+app.post("/deletefile", (req, res) => {
+  let uid = req.cookies.UID;
+  let SelectedFile = req.body.selected_file;
+
+  dashData.user = uid;
+  let dir = path.join(__dirname, `userdata/${uid}/${SelectedFile}`);
+
+  // checking if folder already exists
+  if (!fs.existsSync(dir)) {
+    dashData.fileDeletedsmsg = "";
+    dashData.DeletingErrmsg = "File Not Found!";
+    res.status(403).render("deshboard/index.pug", dashData);
+  } else {
+    if (SelectedFile.indexOf(".") > 0) {
+      // Delete File
+      fs.unlinkSync(dir);
+      dashData.fileDeletedsmsg = "File Is Deleted";
+      dashData.DeletingErrmsg = "";
+      res.status(200).render("deshboard/index.pug", dashData);
+    } else {
+      // Delete Folder
+      fs.rmdir(dir, { recursive: true }, (err) => {
+        if (err) {
+          console.log(err);
+        }
+        dashData.fileDeletedsmsg = "Folder Is Deleted";
+        dashData.DeletingErrmsg = "";
+        res.status(200).render("deshboard/index.pug", dashData);
+      });
+    }
   }
 });
 // END

@@ -39,22 +39,41 @@
                     <h1>Create New File</h1>
                     <input type="text" class="inp" name="file_name" placeholder="Enter File Name" required  /><br/>                    
                     <textarea class="inp" name="file_content" placeholder="Write File Content Here..."></textarea><br/> 
-                    <span id="successMsg">#{successmsg}</span><br/>
-                    <span id="errMsg">#{errmsg}</span><br/>
+                    <span id="successMsg">#{fileCreatedsmsg}</span><br/>
+                    <span id="errMsg">#{CreatingErrmsg}</span><br/>
                     <button type="submit" id="btnCreateFile">CREATE</button>                   
                   </form>
                 </div>
                 <!----- /END ------>
-                //- CREATE FOLDER SECTION
+                <!----- CREATE FOLDER ----->
                 <div id="folderFormBox">
                   <form action="/createfolder" method="post">
                     <h1>Create New Folder</h1>
                     <input type="text" class="inp" name="folder_name" placeholder="Enter Folder Name" required  /><br/> 
-                     <span id="successMsg">#{successmsg}</span><br/>
-                    <span id="errMsg">#{errmsg}</span><br/>
+                     <span id="successMsg">#{folderCreatedmsg}</span><br/>
+                    <span id="errMsg">#{CreatingErrmsg}</span><br/>
                     <button type="submit" id="btnCreateFolder">CREATE</button>                   
                   </form>
                 </div>
+                <!----- /END ------>               
+
+                <!----- DELETE FILES ----->
+                <div id="deleteFileBox">
+                  <form action="/deletefile" method="post">
+                    <h1> Delete Files</h1>                    
+                    <select name="selected_file" class="inp">
+                      <option value="1" disabled>CHOOSE FILE TO DELETE</option>
+                      each file in createdFiles
+                        if file.search(`${user}.json`)
+                          <option value=#{file}>#{file}</option>                                                   
+                    </select><br/>
+                    <span id="successMsg">#{fileDeletedsmsg}</span><br/>
+                    <span id="errMsg">#{DeletingErrmsg}</span><br/>
+                    <button type="submit" id="btnDeleteFile">DELETE</button>                   
+                  </form>
+                </div>
+                <!----- /END ------>
+                
             </div>        
         </div>
     </div>      

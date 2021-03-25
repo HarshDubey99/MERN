@@ -13,6 +13,9 @@
   background-color: black;
   align-items: center;
   color: #fff;
+  position: fixed;
+  top: 0px;
+  width: 100%;
 }
 #headBrand {
   color: white;
@@ -42,10 +45,11 @@
 /* End */
 /* Sidebar */
 #sidebar {
-  /* background-color: red; */
   display: flex;
   flex-direction: column;
   padding-top: 50px;
+  position: fixed;
+  margin-top: 52px;
 }
 #sidebar li {
   padding: 10px;
@@ -80,6 +84,7 @@
   background: black;
 }
 .col2 {
+  padding-top: 80px;
   background-color: lightgray;
   width: 86%;
   text-overflow: ellipsis;
@@ -92,7 +97,7 @@
   align-items: center;
 }
 #statisticBox {
-  padding: 30px;
+  padding: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -129,9 +134,10 @@
 }
 /* Create New Folder */
 #folderFormBox,
-#fileFormBox {
+#fileFormBox,
+#deleteFileBox {
   width: 700px;
-  margin: 200px auto;
+  margin: 150px auto;
   box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.3);
   background: #fff;
   display: flex;
@@ -154,7 +160,8 @@
   text-overflow: ellipsis;
 }
 #btnCreateFolder,
-#btnCreateFile {
+#btnCreateFile,
+#btnDeleteFile {
   margin: 20px auto;
   padding: 10px;
   width: 25%;
