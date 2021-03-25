@@ -16,6 +16,7 @@
               include ../../static/deshboard/sidebar.html 
             </div>
             <div class="col2">
+              <!---- COUNT CARDS ---->
                 <span id="breadcrumb">Deshboard / #{user}</span>                
                 <div id="statisticBox">
                   <div class="cardBox">
@@ -31,7 +32,20 @@
                     <div class="cardBody"><h1>200</h1></div>
                   </div>
                 </div>
-
+              <!----- /END ------>
+                <!----- CREATE FILE ------>
+                <div id="fileFormBox">
+                  <form action="/createfile" method="post">
+                    <h1>Create New File</h1>
+                    <input type="text" class="inp" name="file_name" placeholder="Enter File Name" required  /><br/>                    
+                    <textarea class="inp" name="file_content" placeholder="Write File Content Here..."></textarea><br/> 
+                    <span id="successMsg">#{successmsg}</span><br/>
+                    <span id="errMsg">#{errmsg}</span><br/>
+                    <button type="submit" id="btnCreateFile">CREATE</button>                   
+                  </form>
+                </div>
+                <!----- /END ------>
+                //- CREATE FOLDER SECTION
                 <div id="folderFormBox">
                   <form action="/createfolder" method="post">
                     <h1>Create New Folder</h1>

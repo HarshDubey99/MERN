@@ -27,6 +27,22 @@ let dashData = {
   errmsg: "",
   countCreatedFiles: "",
 };
+// GLOBAL FUNCTIONS
+function getCountCreatedFiles(UID) {
+  let uid = UID;
+
+  let files = [];
+  // Path for in which dir to serch files
+  let dir = path.join(__dirname, `userdata/${uid}/`);
+  let filenames = fs.readdirSync(dir);
+
+  filenames.forEach((file) => {
+    files.push(file);
+  });
+  return files.length;
+}
+// END
+
 // HOME PAGE
 app.get("/", (req, res) => {
   res.status(200).render("index.pug", params);
@@ -37,6 +53,7 @@ app.get("/login", (req, res) => {
   res.status(200).render("login.pug", params);
 });
 
+// LOGIN AUTHENTICATION
 app.post("/authentication", (req, res) => {
   let email = req.body.user_email;
   let password = req.body.user_password;
@@ -75,6 +92,7 @@ app.post("/authentication", (req, res) => {
 app.get("/authentication", (req, res) => {
   res.redirect("/login");
 });
+// END
 
 // SIGNUP PAGE
 app.get("/signup", (req, res) => {
@@ -125,20 +143,7 @@ app.post("/signingup", (req, res) => {
     res.render("signup.pug", params);
   }
 });
-
-function getCountCreatedFiles(UID) {
-  let uid = UID;
-
-  let files = [];
-  // Path for in which dir to serch files
-  let dir = path.join(__dirname, `userdata/${uid}/`);
-  let filenames = fs.readdirSync(dir);
-
-  filenames.forEach((file) => {
-    files.push(file);
-  });
-  return files.length;
-}
+// END
 
 // DESHBOARD
 app.get("/deshboard", (req, res) => {
@@ -153,7 +158,32 @@ app.get("/deshboard", (req, res) => {
     res.status(403).render("login.pug", params);
   }
 });
+// END
 
+// CREATEING FILES
+app.post("/createfile", (req, res) => {
+  let uid = req.cookies.UID;
+  let FileName = req.body.file_name;
+  let FileContent = req.body.file_content;
+  dashData.user = uid;
+  let dir = path.join(__dirname, `userdata/${uid}/${FileName}.txt`);
+
+  // checking if file already exists
+  if (!fs.existsSync(dir)) {
+    // Creating File
+    fs.appendFileSync(dir, FileContent);
+    dashData.successmsg = "File Is Created";
+    dashData.errmsg = "";
+    res.status(200).render("deshboard/index.pug", dashData);
+  } else {
+    dashData.successmsg = "";
+    dashData.errmsg = "File already exists! Try Different Name";
+    res.status(403).render("deshboard/index.pug", dashData);
+  }
+});
+// END
+
+// CREATEING FOLDERS
 app.post("/createfolder", (req, res) => {
   let uid = req.cookies.UID;
   let FolderName = req.body.folder_name;
@@ -173,6 +203,7 @@ app.post("/createfolder", (req, res) => {
     res.status(403).render("deshboard/index.pug", dashData);
   }
 });
+// END
 
 // Display all folders of perticular user
 app.get("/allfiles", (req, res) => {
